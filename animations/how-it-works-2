@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>WebFontConfig = {custom: {families: ['Mark:n4']}};</script>
+  <script src="https://forwardhq.com/assets/fonts-d205a0150ac686780faecc16c8881e49.js"></script>
+
+  <style>
+    html { background: transparent; width: 100%; height: 100%;}
+    body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+
+    #hiw2 {
+      position: relative;
+      width: 250px;
+      height: 240px;
+      margin: 0 auto;
+    }
+
+    #hiw2 div {
+      position: absolute;
+      left: 0; top: 0;
+    }
+
+    #hiw2 .computer,
+    #hiw2 .bubble,
+    #hiw2 .forward {
+      background: url(https://forwardhq.com/assets/how_it_works_2/how-2-new-43cd8eef18904dbee90219e5fe7e8ffe.png) no-repeat left top;
+      background-size: 159px 190px;
+    }
+
+    #hiw2 .computer {
+      top: auto; bottom: 0;
+      left: 50%;
+      width: 120px; height: 70px;
+      margin-left: -61px;
+    }
+
+    #hiw2 .forward {
+      left: 50%; top: 79px;
+      margin-left: -32px;
+      width: 58px; height: 64px;
+      background-position: 0 -125px;
+    }
+
+    #hiw2 .tunnel {
+      left: 110px; top: auto; bottom: 71px;
+      width: 23px; height: 0;
+      background: rgba(51, 196, 107, 1);
+
+      -webkit-transition: all 0.75s;
+      -moz-transition: all 0.75s;
+      transition: all 0.75s;
+    }
+
+    #hiw2.connected .tunnel {
+      height: 64px;
+    }
+
+    #hiw2 .bubble {
+      left: 50%; top: 31px;
+      margin-left: -82px;
+      width: 159px; height: 42px;
+      background-position: 0 -75px;
+      opacity: 0;
+
+      -webkit-transform: translateY(20px);
+      -moz-transform: translateY(20px);
+      transform: translateY(20px);
+
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+
+    #hiw2.has-bubble .bubble {
+      opacity: 1;
+      -webkit-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+
+      #hiw2 .domain {
+        left: 12px; top: 7px;
+        font-size: 16px;
+        font-family: 'Mark', 'MarkComp-Book', Helvetica, sans-serif;
+        font-weight: 400;
+        color: #a0bbbb;
+
+        opacity: 0;
+        -webkit-transform: translateY(5px);
+        -moz-transform: translateY(5px);
+        transform: translateY(5px);
+
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      #hiw2.has-url .domain {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        transform: translateY(0px);
+      }
+
+        #hiw2 .domain strong {
+          font-weight: 400;
+          color: #fff;
+        }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div id="hiw2" class="initial">
+
+      <div class="computer"></div>
+      <div class="tunnel"></div>
+
+      <div class="forward"></div>
+
+      <div class="bubble">
+        <div class="domain">
+          <strong>your-app</strong>.fwd.wf
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    var root = document.getElementById('hiw2');
+    var sequence = [
+      'initial', 6000,
+      'connected', 500,
+      'connected has-bubble', 160,
+      'connected has-bubble has-url', 3940,
+      'connected', 300
+    ];
+
+    var timer;
+    var n = 0;
+    var isRunning = false;
+
+    window.addEventListener('message',
+      function(e) {
+        if ('start' === e.data) startAnimation();
+        if ('stop' === e.data) stopAnimation();
+      },
+      false);
+
+    function startAnimation() {
+      clearTimeout(timer);
+      isRunning = true;
+      step();
+    }
+
+    function stopAnimation() {
+      clearTimeout(timer);
+      isRunning = false;
+      n = 0;
+      step();
+    }
+
+    function step() {
+      root.className = sequence[n];
+      if (!isRunning) return;
+      timer = setTimeout(step, sequence[n+1]);
+      n = (n + 2) % sequence.length;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>WebFontConfig = {custom: {families: ['Mark:n4']}};</script>
+  <script src="https://forwardhq.com/assets/fonts-d205a0150ac686780faecc16c8881e49.js"></script>
+
+  <style>
+    html { background: transparent; width: 100%; height: 100%;}
+    body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+
+    #hiw1 {
+      position: relative;
+      width: 280px; height: 140px;
+      top: 50%;
+      margin: -29px auto 0;
+    }
+
+    #hiw1 div {
+      position: absolute;
+      left: 0; top: 0;
+    }
+
+    #hiw1 .ui {
+      width: 266px;
+      height: 68px;
+    }
+
+    #hiw1 .left,
+    #hiw1 .right,
+    #hiw1 .expander,
+    #hiw1 .split,
+    #hiw1 .address-icon,
+    #hiw1 .forward,
+    #hiw1 .mouse {
+      height: 58px;
+      background: url(https://forwardhq.com/assets/how_it_works_1/how-1-new-1f8666fcc9886fadddc19562cfae045c.png) no-repeat left top;
+      background-size: 50px 395px;
+    }
+
+    #hiw1 .left,
+    #hiw1 .right {
+      -webkit-transition: width 1s;
+      -moz-transition: width 1s;
+      -ms-transition: width 1s;
+      transition: width 1s;
+    }
+
+    #hiw1.forwarding .left,
+    #hiw1.forwarding .right {
+      -webkit-transition: width 0.6s;
+      -moz-transition: width 0.6s;
+      -ms-transition: width 0.6s;
+      transition: width 0.6s;
+    }
+
+    #hiw1 .left {
+      width: 75%;
+    }
+
+    #hiw1 .right {
+      left: auto; right: 0;
+      top: 7px;
+      width: 25%;
+      background-position: right -200px;
+    }
+
+    #hiw1 .expander {
+      background-repeat: repeat-x;
+    }
+
+    #hiw1 .left .expander {
+      left: 50px; right: 18px;
+      background-position: 0 -65px;
+    }
+
+    #hiw1 .left .split {
+      left: auto; right: -19px;
+      width: 37px; height: 70px;
+      background-position: 0 -130px;
+    }
+
+    #hiw1 .right .expander {
+      left: 17px; right: 50px;
+      background-position: 0 -275px;
+    }
+
+    #hiw1 .address {
+      left: 63px; top: 36px;
+      font-size: 12px;
+      font-family: 'Mark', 'MarkComp-Book', Helvetica, sans-serif;
+      font-weight: 400;
+      color: #fff;
+      cursor: default;
+    }
+
+    #hiw1 .address-icon {
+      left: 46px; top: 35px;
+      width: 11px; height: 11px;
+      background-position: -25px -350px;
+    }
+
+    #hiw1.on-page .address-icon {
+      background-position: 0 -350px;
+    }
+
+    #hiw1 .forward {
+      top: 38px; left: 239px;
+      width: 18px; height: 19px;
+      background-position: 0 -375px;
+      opacity: 0.5;
+
+      -webkit-transition: opacity 0.85s;
+      -moz-transition: opacity 0.85s;
+      -ms-transition: opacity 0.85s;
+      transition: opacity 0.85s;
+    }
+
+    #hiw1 .forwarding .forward {
+      -webkit-transition: opacity 0.1s;
+      -moz-transition: opacity 0.1s;
+      -ms-transition: opacity 0.1s;
+      transition: opacity 0.1s;
+    }
+
+    #hiw1 .mouse {
+      left: 170px; top: 90px;
+      width: 9px; height: 13px;
+      background-position: -25px -375px;
+      opacity: 0;
+
+      -webkit-transition: opacity 0.2s;
+      -moz-transition: opacity 0.2s;
+      -ms-transition: opacity 0.2s;
+      transition: opacity 0.2s;
+    }
+
+    #hiw1.initial .mouse,
+    #hiw1.typing .mouse,
+    #hiw1.forwarding .mouse {
+      left: 251px; top: 51px;
+    }
+
+    #hiw1.forwarding .mouse {
+      opacity: 1;
+
+      -webkit-transition: opacity 0.2s, left 0.6s ease-out, top 0.6s ease-in;
+      -moz-transition: opacity 0.2s, left 0.6s ease-out, top 0.6s ease-in;
+      -ms-transition: opacity 0.2s, left 0.6s ease-out, top 0.6s ease-in;
+      transition: opacity 0.2s, left 0.6s ease-out, top 0.6s ease-in;
+    }
+
+    #hiw1.mouse-out .mouse {
+      opacity: 0;
+      top: 90px;
+      -webkit-transition: opacity 0.35s ease-in, top 0.6s ease-in;
+      -moz-transition: opacity 0.35s ease-in, top 0.6s ease-in;
+      -ms-transition: opacity 0.35s ease-in, top 0.6s ease-in;
+      transition: opacity 0.35s ease-in, top 0.6s ease-in;
+    }
+
+    #hiw1.forwarding .left {
+      width: 66.6666%;
+    }
+
+    #hiw1.forwarding .right {
+      width: 33.3333%;
+    }
+
+    #hiw1.running .forward {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="hiw1" class="initial">
+    <div class="ui">
+      <div class="left">
+        <div class="expander"></div>
+        <div class="split"></div>
+      </div>
+
+      <div class="right">
+        <div class="expander"></div>
+      </div>
+    </div>
+
+    <div class="address-icon"></div>
+    <div class="address" id="js-address"></div>
+
+    <div class="forward"></div>
+    <div class="mouse"></div>
+  </div>
+
+  <script>
+    var root = document.getElementById('hiw1');
+    var addressElem = document.getElementById('js-address');
+    var sequence = [
+      'initial', 600,
+      'typing', 2500,
+      'on-page', 500,
+      'on-page forwarding', 1000,
+      'on-page forwarding running', 300,
+      'on-page forwarding running mouse-out', 6000
+    ];
+
+    var n = 0;
+    var isRunning = false;
+    var timer;
+
+    window.addEventListener('message',
+      function(e) {
+        if ('start' === e.data) startAnimation();
+        if ('stop' === e.data) stopAnimation();
+      },
+      false);
+
+    function startAnimation() {
+      clearTimeout(timer);
+      isRunning = true;
+      step();
+    }
+
+    function stopAnimation() {
+      clearTimeout(timer);
+      isRunning = false;
+      n = 0;
+      step();
+    }
+
+    function step() {
+      var classes = sequence[n];
+      var delay = sequence[n+1];
+
+      if ('initial' === classes) {
+        clearAddress();
+      }
+      else if ('typing' === classes) {
+        typeAddress();
+      }
+
+      root.className = classes;
+      if (!isRunning) return;
+
+      timer = setTimeout(step, delay);
+      n = (n + 2) % sequence.length;
+    }
+
+    function typeAddress() {
+      var characters = 'localhost:3000'.split('');
+      var addressSoFar = '';
+      var n = 0;
+      var times = randomItem([
+        [571, 184, 127, 200, 112, 225, 55, 73, 79, 152, 184, 113, 159, 137],
+        [523, 158, 64, 48, 81, 128, 64, 64, 80, 128, 264, 96, 160, 160],
+        [451, 181, 64, 57, 119, 129, 55, 89, 80, 152, 192, 96, 144, 160],
+        [400, 167, 64, 64, 112, 184, 32, 128, 88, 264, 168, 96, 144, 144]
+      ]);
+
+      clearAddress();
+      setTimeout(typeCharacter, times[0]);
+
+      function typeCharacter() {
+        var character = characters[n];
+        addressSoFar += character;
+        addressElem.innerHTML = addressSoFar;
+
+        n++;
+        if (n < characters.length) {
+          setTimeout(typeCharacter, times[n]);
+        }
+      }
+    }
+
+    function clearAddress() {
+      addressSoFar = '';
+      addressElem.innerHTML = '';
+    }
+
+    function randomItem(arr) {
+      return arr[r(0, arr.length - 1)];
+    }
+
+    function r(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+    }
+  </script>
+</body>
+</html>

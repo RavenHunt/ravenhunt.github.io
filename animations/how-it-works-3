@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html { background: transparent; width: 100%; height: 100%;}
+    body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+
+    #hiw3 {
+      position: relative;
+      width: 250px;
+      height: 215px;
+      margin: 0 auto;
+      top: 13px;
+    }
+
+    #hiw3 div {
+      position: absolute;
+      left: 0; top: 0;
+    }
+
+    #hiw3 .computer,
+    #hiw3 .iphone,
+    #hiw3 .forward {
+      background: url(https://forwardhq.com/assets/how_it_works_3/how-3-new-7326fefe58e90f6f6d42db5e06d4690e.png) no-repeat left top;
+      background-size: 72px 155px;
+    }
+
+    #hiw3 .computer {
+      top: auto; bottom: 0;
+      width: 72px; height: 42px;
+    }
+
+    #hiw3 .iphone {
+      width: 24px; height: 46px;
+      left: 24px; top: auto; bottom: 0;
+      background-position: 0 -50px;
+    }
+
+    #hiw3 .forward {
+      width: 51px; height: 55px;
+      left: 50%; top: 50%;
+      margin: -27px 0 0 -25px;
+      background-position: 0 -100px;
+    }
+
+    #hiw3 .remote,
+    #hiw3 .local {
+      top: auto; left: 50%; bottom: 0;
+      width: 72px; height: 122px;
+      margin-left: -36px;
+    }
+
+    #hiw3 .remote {
+      bottom: -17px;
+    }
+
+    #hiw3 .remote {
+      -webkit-transform-origin: 36px 0px;
+      -moz-transform-origin: 36px 0px;
+      transform-origin: 36px 0px;
+    }
+
+    #hiw3 .remote.right {
+      -webkit-transform: rotate(-120deg);
+      -moz-transform: rotate(-120deg);
+      transform: rotate(-120deg);
+    }
+
+    #hiw3 .remote.left {
+      -webkit-transform: rotate(120deg);
+      -moz-transform: rotate(120deg);
+      transform: rotate(120deg);
+    }
+
+    #hiw3 .tunnel {
+      left: 27px; top: 15px;
+      width: 17px; height: 64px;
+      background: rgba(51, 196, 107, 1);
+    }
+
+    #hiw3 .tunnel .requests {
+      left: 3px;
+      width: 12px; height: 100%;
+      background: url(https://forwardhq.com/assets/how_it_works_3/double-arrows-new-e18f84cf20e5eb2e2eaa28a64f4a5987.gif) repeat-y left top;
+      background-size: 12px 7px;
+    }
+
+    #hiw3 .single-requests {
+      left: 30px;
+      width: 12px; height: 80px;
+      background: url(https://forwardhq.com/assets/how_it_works_3/single-arrows-new-0fa17485589b2294bd1293199cdb46c3.gif) repeat-y left top;
+      background-size: 12px 14px;
+    }
+
+    #hiw3 .right .single-requests {
+      height: 76px;
+    }
+
+    #hiw3 .requests,
+    #hiw3 .single-requests {
+      opacity: 0;
+      -webkit-transition: opacity 1s;
+      -moz-transition: opacity 1s;
+      transition: opacity 1s;
+    }
+
+    #hiw3.running .requests,
+    #hiw3.running .single-requests {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="hiw3" class="none">
+
+    <div class="local">
+      <div class="computer"></div>
+      <div class="tunnel">
+        <div class="requests"></div>
+      </div>
+    </div>
+
+    <div class="remote left">
+      <div class="computer"></div>
+      <div class="single-requests"></div>
+    </div>
+
+    <div class="remote right">
+      <div class="iphone"></div>
+      <div class="single-requests"></div>
+    </div>
+
+    <div class="forward"></div>
+
+  </div>
+
+  <script>
+    var root = document.getElementById('hiw3');
+    window.addEventListener(
+      'message',
+      function(e) { if ('start' === e.data) root.className = 'running'; },
+      false);
+  </script>
+</body>
+</html>

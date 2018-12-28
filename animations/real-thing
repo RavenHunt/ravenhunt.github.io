@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html { background: #3e5050; width: 100%; height: 100%;}
+    body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+
+    #real {
+      position: absolute;
+      width: 383px;
+      height: 243px;
+      left: 50%; top: 0;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+    }
+
+    #real div {
+      position: absolute;
+      left: 0; top: 0;
+    }
+
+    #real .browser {
+      width: 383px; height: 243px;
+      background: url(https://forwardhq.com/assets/real_thing/browser-and-page-96d06d3d099fac16ac20668d1d336af0.png) no-repeat left top;
+      background-size: 383px 887px;
+    }
+
+    #real .code,
+    #real .page {
+      overflow: hidden;
+      top: 28px;
+      width: 383px; height: 215px;
+      mask: url(https://forwardhq.com/assets/real_thing/code-mask-738717fe7e0bfa87b398149af501c489.svg#mask);
+      -webkit-mask: url(https://forwardhq.com/assets/real_thing/code-mask-d200d9108a4e3735dcf2de6a0ebb6654.png) left top no-repeat;
+    }
+
+    #real .page {
+      mask: url(https://forwardhq.com/assets/real_thing/page-mask-141573881fb0e1ed7247e81d46505aa9.svg#mask);
+      -webkit-mask: url(https://forwardhq.com/assets/real_thing/page-mask-eadd4dedf77050eaeb2f72eeacdab785.png) left top no-repeat;
+    }
+
+      #real .inner {
+        width: 383px; height: 900px;
+      }
+
+      #real.animated .inner {
+        -webkit-transition: -webkit-transform 5s;
+      }
+
+      #real .page .inner {
+        background: url(https://forwardhq.com/assets/real_thing/browser-and-page-96d06d3d099fac16ac20668d1d336af0.png) no-repeat 58px -264px;
+        background-size: 383px 887px;
+      }
+
+      #real .code .inner {
+        background: url(https://forwardhq.com/assets/real_thing/code-new-a0d0b7f6729d8964b5d296b8fa654a22.png) no-repeat 10px -113px;
+        background-size: 347px 945px;
+      }
+
+      #real.none .inner {
+        -webkit-transform: translateY(0px);
+      }
+
+      #real.a-bit .inner {
+        -webkit-transform: translateY(-120px);
+      }
+
+      #real.a-bit-more .inner {
+        -webkit-transform: translateY(-265px);
+      }
+
+      #real.a-lot .inner {
+        -webkit-transform: translateY(-480px);
+      }
+
+    @media all and (max-width: 400px) {
+      #real {
+        transform: scale(0.7) translateX(-50%);
+        -webkit-transform: scale(0.7) translateX(-50%);
+        -moz-transform: scale(0.7) translateX(-50%);
+        transform-origin:0% 50%;
+        -webkit-transform-origin:0% 50%;
+        -moz-transform-origin:0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="real" class="none">
+
+    <div class="browser">
+      <div class="code">
+        <div class="inner" id="js-code-inner"></div>
+      </div>
+
+      <div class="page">
+        <div class="inner" id="js-page-inner"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+
+    // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+
+    // MIT license
+    (function() {
+      var lastTime = 0;
+      var vendors = ['ms', 'moz', 'webkit', 'o'];
+      for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+      }
+
+      if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+          var currTime = new Date().getTime();
+          var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+          var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+            timeToCall);
+          lastTime = currTime + timeToCall;
+          return id;
+        };
+
+      if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+          clearTimeout(id);
+        };
+    }());
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+  </script>
+
+  <script>
+    var container = document.getElementById('real');
+    var page = document.getElementById('js-page-inner');
+    var code = document.getElementById('js-code-inner');
+
+    window.addEventListener('message', receivedMessage, false);
+
+    function receivedMessage(e) {
+      if ('autoScroll' === e.data) autoScroll();
+      if (e.data && (typeof e.data.scrollPos === 'number')) {
+        scrollTo(e.data.scrollPos);
+      }
+    }
+
+    function scrollTo(pos) {
+      var max = 480;
+      var y = pos * max;
+
+      // window.requestAnimationFrame(function() {
+        page.style.WebkitTransform = 'translateY(-' + y + 'px)';
+        code.style.WebkitTransform = 'translateY(-' + y + 'px)';
+        page.style.MozTransform = 'translateY(-' + y + 'px)';
+        code.style.MozTransform = 'translateY(-' + y + 'px)';
+        page.style.transform = 'translateY(-' + y + 'px)';
+        code.style.transform = 'translateY(-' + y + 'px)';
+      // });
+    }
+
+    function autoScroll() {
+      var sequence = ['a-bit', 'a-bit-more', 'a-lot', 'none'];
+      var n = 0;
+
+      setTimeout(step, 600);
+
+      function step() {
+        container.className = sequence[n] + ' animated';
+        n = (n + 1) % sequence.length;
+        setTimeout(step, sequence[n] === 'none' ? 6000 : 4800);
+      }
+    }
+
+  </script>
+</body>
+</html>

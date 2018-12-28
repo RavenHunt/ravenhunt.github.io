@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html { background: transparent; width: 100%; height: 100%;}
+    body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+
+    #rwd {
+      position: relative;
+      width: 349px; height: 349px;
+      margin: 0 auto;
+    }
+
+    #rwd div {
+      position: absolute;
+      left: 0; top: 0;
+      -webkit-transition: all 0.6s;
+      -moz-transition: all 0.6s;
+      transition: all 0.6s;
+    }
+
+    #rwd img {
+      display: block;
+      width: 100%; height: auto;
+      pointer-events: none;
+    }
+
+    #rwd .clip {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    #rwd .screen {
+      left: 50%; top: 30%; /*105px*/
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    #rwd.imac .screen {
+      width: 100%;
+      height: 59%;
+    }
+
+    #rwd.mbp .screen {
+      width: 68.48%;
+      height: 44.98%;
+    }
+
+    #rwd.ipad .screen {
+      width: 43.55%;
+      height: 55.87%;
+    }
+
+    #rwd.iphone .screen {
+      width: 17.47%;
+      height: 34.96%;
+    }
+
+      #rwd .screen .border {
+        width: 100%; height: 100%;
+        background: #2d2d2d;
+        border-radius: 12px;
+        border: 0px transparent solid;
+        overflow: hidden;
+      }
+
+      #rwd.ipad .screen .border {
+        border: 3px #c5caca solid;
+      }
+
+      #rwd.iphone .screen .border {
+        border-radius: 9px;
+        border: 1px #c5caca solid;
+      }
+
+      #rwd.imac .screen .border,
+      #rwd.mbp .screen .border {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      #rwd .screen .inside {
+        background: #435757;
+        left: 12px; top: 12px;
+        right: 12px; bottom: 12px;
+        border-bottom: 5px #435757 solid;
+        overflow: hidden;
+      }
+
+      #rwd.mbp .screen .inside {
+        left: 9px; top: 11px;
+        right: 9px; bottom: 8px;
+      }
+
+      #rwd.ipad .screen .inside {
+        left: 20px; top: 20px;
+        bottom: 14px; right: 14px;
+      }
+
+      #rwd.iphone .screen .inside {
+        left: 3px; top: 20px;
+        bottom: 20px; right: 1px;
+      }
+
+      #rwd .content {
+        position: relative;
+        margin: 0 auto;
+        width: 60%;
+        line-height: 6px;
+      }
+
+      #rwd.mbp .content {
+        width: 75%;
+      }
+
+      #rwd.ipad .content {
+        width: 85%;
+      }
+
+      #rwd.iphone .content {
+        width: 86%;
+      }
+
+      #rwd .content span {
+        display: block;
+        margin-bottom: 0.5em;
+      }
+
+      #rwd .content em,
+      #rwd .content i,
+      #rwd .content b,
+      #rwd .content strong {
+        display: inline-block;
+        border-top: 1px #c5caca solid;
+        width: 6px;
+      }
+
+      #rwd .content i {
+        width: 11px;
+      }
+
+      #rwd .content b {
+        width: 7px;
+      }
+
+      #rwd .content strong {
+        width: 15px;
+      }
+
+      #rwd.iphone .header > *,
+      #rwd.nexus .header > * {
+        display: none;
+      }
+
+      #rwd.iphone .header > img,
+      #rwd.nexus .header > img {
+        display: block;
+      }
+
+      #rwd .content .header {
+        position: relative;
+        text-align: right;
+        padding-top: 6px;
+      }
+
+        #rwd .content .header .logo,
+        #rwd .content .header .hamburger {
+          position: absolute;
+          left: -1px; top: 6px;
+          width: 15px;
+        }
+
+        #rwd.iphone .header .logo,
+        #rwd.nexus .header .logo {
+          width: 12px; height: 12px;
+        }
+
+        #rwd .content .header .hamburger {
+          display: none;
+          left: auto; top: 8px; right: 2px;
+          width: 5px;
+        }
+
+        #rwd.iphone .content .header .hamburger,
+        #rwd.nexus .content .header .hamburger {
+          display:block;
+        }
+
+
+      #rwd .content .text {
+        width: 70%;
+      }
+
+      #rwd.ipad .content .text,
+      #rwd.iphone .content .text,
+      #rwd.nexus .content .text {
+        width: 100%;
+      }
+
+      #rwd .content .sidebar {
+        position: absolute;
+        top: 26px; right: 0;
+        width: 25%;
+        padding-top: 2px;
+        overflow: hidden;
+      }
+
+      #rwd.ipad .content .sidebar,
+      #rwd.iphone .content .sidebar,
+      #rwd.nexus .content .sidebar {
+        width: 0;
+      }
+
+      #rwd .content .sidebar .ad {
+        height: 30px;
+        border: 1px #c5caca solid;
+        margin-left: 1px;
+      }
+
+    #rwd .home-button {
+      top: auto;
+      left: 50%;
+      bottom: -50px;
+      border-radius: 30px;
+      width: 10px; height: 10px;
+      background: #3e5050;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+
+    #rwd .iphone-front-details {
+      top: -50px;
+      left: 50%;
+      width: 61px;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+
+    #rwd.iphone .iphone-front-details {
+      top: 9px;
+    }
+
+    #rwd.ipad .home-button {
+      bottom: 1px;
+    }
+
+    #rwd.iphone .home-button {
+      bottom: 3px;
+      width: 13px; height: 13px;
+    }
+
+    #rwd .base {
+      background: #c5caca;
+      left: 50%;
+      top: 60%;
+      width: 43.55%;
+      height: 0px;
+      overflow: hidden;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+
+    #rwd.imac .base {
+      top: 59%;
+      width: 100%;
+      height: 9.5%;
+      opacity: 1;
+    }
+
+    #rwd.mbp .base {
+      top: 54%;
+      height: 2.87%;
+      width: 84.38%;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      opacity: 1;
+    }
+
+      #rwd .mbp-notch {
+        top: -22px;
+        left: 50%;
+        width: 294px;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+
+      #rwd.mbp .mbp-notch {
+        top: -5px;
+      }
+
+    #rwd .stand {
+      top: 200%;
+    }
+
+    #rwd.imac .stand {
+      top: 68.5%;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div id="rwd" class="imac animation">
+      <div class="clip">
+
+        <div class="screen">
+          <div class="border">
+            <div class="iphone-front-details">
+              <img src="https://forwardhq.com/assets/responsive/iphone-front-details-fc802887e3fb878f1a20595f3c065b82.png" alt="Iphone front details" />
+            </div>
+          </div>
+
+          <div class="inside">
+            <div class="content">
+              <span class="header">
+                <img class="logo" src="https://forwardhq.com/assets/responsive/faux-logo-afdaa703dbbb4726f0bc54595ce5e193.png" alt="Faux logo" width="20" height="20" />
+                <img class="hamburger" src="https://forwardhq.com/assets/responsive/hamburger-a2796a8f3f9af719ffb0ad2ccdb47967.png" alt="Hamburger" width="5" height="5" />
+                <em></em>&nbsp;<strong></strong>&nbsp;<i></i>&nbsp;<b></b>
+              </span>
+
+              <span class="text">
+                <span><em></em><i></i><i></i><i></i><b></b><b></b><em></em><em></em><b></b><em></em><em></em><i></i><b></b><em></em><i></i><i></i><b></b><b></b><b></b><b></b><b></b><em></em><i></i><b></b><strong></strong><em></em><b></b><strong></strong><strong></strong><b></b><i></i><b></b><i></i><em></em><b></b><em></em><b></b><i></i><i></i><i></i><em></em><b></b><em></em><b></b><em></em><strong></strong><em></em><em></em><i></i><b></b><b></b><em></em><i></i><b></b><em></em><i></i><em></em><em></em><b></b><strong></strong><strong></strong><strong></strong><b></b><i></i><i></i><em></em><b></b><b></b><i></i><em></em><i></i><b></b><em></em><b></b><b></b><strong></strong><i></i><em></em><b></b><em></em><strong></strong><b></b><b></b><em></em>
+                  </span>
+
+                <span><strong></strong><strong></strong><b></b><i></i><i></i><em></em><strong></strong><em></em><b></b><i></i><strong></strong><b></b><b></b><em></em><i></i><em></em><i></i><i></i><b></b><b></b><strong></strong><b></b><strong></strong><i></i><em></em><em></em><em></em><em></em><em></em><strong></strong><strong></strong><i></i><em></em><b></b><b></b><b></b><strong></strong><strong></strong><strong></strong><b></b><em></em><strong></strong><em></em><em></em><strong></strong><b></b><i></i><em></em><em></em><em></em><i></i><b></b><b></b><strong></strong><i></i><strong></strong><em></em><em></em><i></i><i></i><i></i><strong></strong><strong></strong><em></em><b></b><b></b><b></b><i></i><i></i><b></b><i></i><strong></strong><em></em>
+                </span>
+
+                <span><b></b><b></b><em></em><i></i><em></em><em></em><em></em><b></b><b></b><b></b><b></b><i></i><em></em><em></em><em></em><b></b><b></b><b></b><em></em><b></b><b></b><em></em><em></em><em></em><strong></strong><em></em><i></i><i></i><i></i><em></em><b></b><b></b><em></em><b></b><i></i><em></em><em></em><i></i><b></b><b></b><i></i><em></em><em></em><i></i><strong></strong><strong></strong><b></b><b></b><b></b><i></i><b></b><em></em><i></i><i></i><i></i><em></em><em></em><strong></strong><i></i><strong></strong><em></em><em></em><b></b><em></em><em></em><i></i><b></b><b></b><b></b><i></i><em></em><em></em><b></b><em></em><i></i><strong></strong><b></b><i></i><b></b><b></b><i></i><i></i><b></b><b></b><b></b><strong></strong><i></i><em></em><i></i><em></em><em></em><b></b><i></i><em></em><b></b><em></em><b></b><em></em><em></em><b></b><em></em><em></em><b></b><em></em><b></b><em></em><b></b><em></em><strong></strong><i></i><strong></strong><strong></strong><em></em><em></em><em></em><b></b><i></i><i></i><b></b><em></em><i></i><em></em><em></em><em></em><b></b><b></b><em></em><em></em><em></em><em></em><em></em><i></i><b></b><b></b><i></i><i></i><b></b><strong></strong><em></em><b></b><b></b><b></b><b></b><b></b><i></i><em></em><strong></strong><b></b><b></b><em></em><b></b><b></b><strong></strong><i></i><em></em><strong></strong><i></i><i></i><em></em><b></b><em></em><em></em><strong></strong><strong></strong><em></em><em></em><b></b><i></i><b></b><i></i><em></em><em></em><b></b><i></i><b></b><em></em><em></em><strong></strong><i></i><b></b><em></em><b></b><em></em><i></i><b></b><em></em><em></em><em></em><em></em><em></em><b></b><em></em><b></b><em></em><em></em><em></em><em></em><b></b><i></i><i></i><em></em><i></i><b></b><em></em><b></b><strong></strong><em></em><i></i><em></em><b></b><i></i><strong></strong><i></i><strong></strong><b></b><em></em><i></i><em></em><em></em><strong></strong><b></b><b></b><i></i><strong></strong><i></i><em></em><em></em><i></i><i></i><strong></strong><b></b><i></i><b></b><strong></strong><i></i><b></b><b></b><em></em><i></i><em></em><b></b><em></em><strong></strong></span>
+              </span>
+
+              <span class="sidebar">
+                <span class="ad"></span>
+                <span class="ad"></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="home-button"></div>
+        </div>
+
+        <div class="base">
+          <div class="mbp-notch"><img src="https://forwardhq.com/assets/responsive/mbp-notch-a96abeac4de80da7f3e37c7d11a3c2b9.png" alt="Mbp notch" /></div>
+        </div>
+
+        <div class="stand">
+          <img src="https://forwardhq.com/assets/responsive/imac-base-6f9c8415416528a68d3f4b2dc385e211.png" alt="Imac base" />
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var container = document.getElementById('rwd');
+    var sequence = ['imac', 'mbp', 'ipad', 'iphone', 'ipad', 'mbp'];
+    var n = 0;
+    var isRunning = false;
+    var timer;
+
+    window.addEventListener('message',
+      function(e) {
+        if ('start' === e.data) startAnimation();
+        if ('stop' === e.data) stopAnimation();
+      },
+      false);
+
+    function startAnimation() {
+      clearTimeout(timer);
+      isRunning = true;
+      step();
+    }
+
+    function stopAnimation() {
+      clearTimeout(timer);
+      isRunning = false;
+      step();
+    }
+
+    step();
+
+    function step() {
+      container.className = sequence[n];
+
+      if (!isRunning) return;
+      n = (n + 1) % sequence.length;
+      timer = setTimeout(step, 1600);
+      // timer = setTimeout(step, 1000);
+    }
+  </script>
+</body>
+</html>
