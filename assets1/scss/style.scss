@@ -1,0 +1,268 @@
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/custom";
+@import "icon-fonts";
+@import "mixins/custom-mixins";
+
+// components
+@import "components/mouse-scroll";
+
+@import "components/testimonial";
+@import "components/pricing";
+@import "components/features";
+@import "components/team";
+@import "components/cover";
+@import "components/forms";
+@import "components/portfolio";
+@import "components/blog";
+@import "components/loader";
+
+html {
+	overflow-x: hidden;
+	font-size: 1em;
+}
+body {
+	font-family: $font-family-sans-serif;
+}
+input, textarea, p {
+	font-weight: $font-weight-normal;
+}
+// selection
+::selection {
+  background: $black; 
+  color: $white;
+}
+::-moz-selection {
+  background: $black; 
+  color: $white;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300!important;
+}
+a {
+	transition: .3s all ease;
+}
+
+@import "components/header";
+
+.btn {
+	padding: 10px 25px;
+	&.btn-primary {
+		color: $white;
+	}
+	&:hover, &:active, &:focus {
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+	}
+}
+// bg
+.bg_image {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.with-overlay {
+	position: relative;
+	&:before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		content: "";
+		background: rgba($black,.4);
+	}
+}
+
+.probootstrap_navbar {
+	.nav-item {
+		&.active {
+			> a {
+				color: theme-color('primary')!important;
+			}
+		}
+	}
+	&.scrolled {
+		.nav-item {
+			&.active {
+				> a {
+					color: theme-color('primary')!important;
+				}
+			}
+		}
+	}
+}
+
+.probootstrap_cover_v3 {
+	p, .lead {
+		color: rgba(255,255,255,1);
+	}
+}
+
+.probootstrap-section-half {
+	float: left;
+	width: 100%;
+	.probootstrap-image,
+	.probootstrap-text {
+		width: 50%;
+		@include media-breakpoint-down(md) {
+			width: 100%;
+		}
+	}
+	.probootstrap-image {
+		@extend .bg_image;
+		@include media-breakpoint-down(sm) {
+			height: 400px;
+		}
+	}
+	.probootstrap-text {
+		background: #ECECEC;
+		.probootstrap-inner {
+			padding: 7em;
+			@include media-breakpoint-down(md) {
+				padding: 3em;
+			}
+			@include media-breakpoint-down(md) {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+		}
+	}
+}
+.probootstrap-media {
+	.read-more {
+		text-align: center;
+		a {
+			width: 40px;
+			height: 40px;
+			display: block;
+			margin: 0 auto;
+			position: relative;
+			border-radius: 50%;
+
+			transition: .5s all ease;
+			span {
+				top: 50%;
+				left: 50%;
+				line-height: 0;
+				position: absolute;
+				transform: translate(-50%, -50%)
+			}
+		}
+	}
+	&:hover {
+		.read-more {
+			a {
+				background: theme-color('primary');
+				> span {
+					color: $white;
+				}
+			}
+		}
+	}
+}
+.probootstrap_section {
+	padding: 10em 0;
+	float: left;
+	width: 100%;
+	&.bg-light {
+		background: #ECECEC!important;
+	}
+}
+.probootstrap_feature-v1 {
+	padding: 3em;
+	transition: .3s all ease;
+	position: relative;
+	top: 0;
+	border-radius: 4px;
+	&:hover, &:focus {
+		top: -10px;
+		background: $white;
+		box-shadow: 0 2px 10px 0 rgba(0,0,0,.05);
+		@include media-breakpoint-down(md) {
+			top: 0;
+		}
+	}
+}
+
+.probootstrap-border-top {
+	border-top: 1px solid #ECECEC;
+}
+
+// form
+.probootstrap-form {
+	margin-bottom: 0px;
+	padding: 40px;
+	background: $white;
+	margin-bottom: 50px;
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,.05);
+	border-radius: 4px;
+	@include media-breakpoint-down(md) {
+		padding: 15px;
+	}
+	label {
+		font-weight: normal;
+	}	
+	.form-control {
+		height: 46px;
+		box-shadow: none;
+		font-size: 14px;
+		appearance: none;
+		border-radius: 4px;
+		border: 1px solid lighten($black, 85%);
+		&:active, &:focus {
+			box-shadow: none;
+			border: 1px solid theme-color('primary');
+		}
+	}
+	.form-group{
+		&:last-child {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+		label {
+			text-transform: uppercase;
+			font-size: 13px;
+		}
+		.form-field {
+			position: relative;
+			.icon {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				right: 20px;
+			}
+			.form-control {
+				padding-right: 50px;
+			}
+		}
+	}
+	textarea.form-control {
+		height: inherit;
+		resize:vertical; 
+	}
+}
+
+// contact details
+.probootstrap-contact-details {
+	padding: 0;
+	margin: 0;
+	li {
+		padding: 0;
+		margin: 0 0 30px 0;
+		list-style: none;
+		> span {
+			display: block;
+			color: rgba(0,0,0,.3);
+			color: theme-color('primary')
+		}
+	}
+}
+
+
+
+// animate
+.probootstrap-animate {
+	opacity: 0;
+	visibility: hidden;
+}
